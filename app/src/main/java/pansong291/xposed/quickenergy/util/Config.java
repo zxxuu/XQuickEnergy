@@ -89,6 +89,8 @@ public class Config {
     public static final String jn_receiveFarmToolReward = "receiveFarmToolReward";
     public static final String jn_recordFarmGame = "recordFarmGame";
     public static final String jn_kitchen = "kitchen";
+
+    public static final String jn_useSpecialFood = "useSpecialFood";
     public static final String jn_useNewEggTool = "useNewEggTool";
     public static final String jn_harvestProduce = "harvestProduce";
     public static final String jn_donation = "donation";
@@ -217,6 +219,8 @@ public class Config {
 
     private boolean exchangeEnergyDoubleClick;
     private int exchangeEnergyDoubleClickCount;
+    private boolean exchangeEnergyShield;
+    private int exchangeEnergyShieldCount;
     private boolean antdodoCollect;
     private boolean antOcean;
     private boolean userPatrol;
@@ -234,6 +238,7 @@ public class Config {
     private boolean receiveFarmToolReward;
     private boolean recordFarmGame;
     private boolean kitchen;
+    private boolean useSpecialFood;
     private boolean useNewEggTool;
     private boolean harvestProduce;
     private boolean donation;
@@ -702,7 +707,7 @@ public class Config {
         return getConfig().energyRain;
     }
 
-    public static boolean ExchangeEnergyDoubleClick() {
+    public static boolean exchangeEnergyDoubleClick() {
         return getConfig().exchangeEnergyDoubleClick;
     }
 
@@ -720,6 +725,24 @@ public class Config {
         hasChanged = true;
     }
 
+
+    public static boolean exchangeEnergyShield() {
+        return getConfig().exchangeEnergyShield;
+    }
+
+    public static void setExchangeEnergyShield(boolean b) {
+        getConfig().exchangeEnergyShield = b;
+        hasChanged = true;
+    }
+
+    public static int getExchangeEnergyShieldCount() {
+        return getConfig().exchangeEnergyShieldCount;
+    }
+
+    public static void setExchangeEnergyShieldCount(int i) {
+        getConfig().exchangeEnergyShieldCount = i;
+        hasChanged = true;
+    }
     public static void setAncientTreeOnlyWeek(boolean b) {
         getConfig().ancientTreeOnlyWeek = b;
         hasChanged = true;
@@ -867,6 +890,15 @@ public class Config {
 
     public static boolean kitchen() {
         return getConfig().kitchen;
+    }
+
+    public static void setUseSpecialFood(boolean b) {
+        getConfig().useSpecialFood = b;
+        hasChanged = true;
+    }
+
+    public static boolean useSpecialFood() {
+        return getConfig().useSpecialFood;
     }
 
     public static void setUseNewEggTool(boolean b) {
@@ -1433,6 +1465,8 @@ public class Config {
             c.giveEnergyRainList = new ArrayList<>();
         c.exchangeEnergyDoubleClick = false;
         c.exchangeEnergyDoubleClickCount = 6;
+        c.exchangeEnergyShield = false;
+        c.exchangeEnergyShieldCount = 6;
         c.ancientTreeOnlyWeek = true;
         c.antdodoCollect = true;
         c.antOcean = true;
@@ -1451,6 +1485,7 @@ public class Config {
         c.receiveFarmToolReward = true;
         c.recordFarmGame = true;
         c.kitchen = true;
+        c.useSpecialFood = false;
         c.useNewEggTool = true;
         c.harvestProduce = true;
         c.donation = true;
@@ -1752,6 +1787,12 @@ public class Config {
             config.exchangeEnergyDoubleClickCount = jo.optInt("exchangeEnergyDoubleClickCount", 6);
             Log.i(TAG, "exchangeEnergyDoubleClickCount" + ":" + config.exchangeEnergyDoubleClickCount);
 
+            config.exchangeEnergyShield = jo.optBoolean("exchangeEnergyShield", false);
+            Log.i(TAG, "exchangeEnergyShield" + ":" + config.exchangeEnergyShield);
+
+            config.exchangeEnergyShieldCount = jo.optInt("exchangeEnergyShieldCount", 6);
+            Log.i(TAG, "exchangeEnergyShieldCount" + ":" + config.exchangeEnergyShieldCount);
+
             config.ancientTreeOnlyWeek = jo.optBoolean(jn_ancientTreeOnlyWeek, true);
             //Log.i(TAG, jn_ancientTreeOnlyWeek + ":" + config.ancientTreeOnlyWeek);
 
@@ -1806,6 +1847,8 @@ public class Config {
 
             config.kitchen = jo.optBoolean(jn_kitchen, true);
             //Log.i(TAG, jn_kitchen + ":" + config.kitchen);
+
+            config.useSpecialFood = jo.optBoolean(jn_useSpecialFood, false);
 
             config.useNewEggTool = jo.optBoolean(jn_useNewEggTool, true);
             //Log.i(TAG, jn_useNewEggTool + ":" + config.useNewEggTool);
@@ -2186,6 +2229,10 @@ public class Config {
 
             jo.put("exchangeEnergyDoubleClickCount", config.exchangeEnergyDoubleClickCount);
 
+            jo.put("exchangeEnergyShield", config.exchangeEnergyShield);
+
+            jo.put("exchangeEnergyShieldCount", config.exchangeEnergyShieldCount);
+
             jo.put(jn_ancientTreeOnlyWeek, config.ancientTreeOnlyWeek);
 
             jo.put(jn_antdodoCollect, config.antdodoCollect);
@@ -2222,6 +2269,8 @@ public class Config {
             jo.put(jn_recordFarmGame, config.recordFarmGame);
 
             jo.put(jn_kitchen, config.kitchen);
+
+            jo.put(jn_useSpecialFood, config.useSpecialFood);
 
             jo.put(jn_useNewEggTool, config.useNewEggTool);
 

@@ -2,6 +2,7 @@ package pansong291.xposed.quickenergy;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import pansong291.xposed.quickenergy.data.RuntimeInfo;
 import pansong291.xposed.quickenergy.hook.AntBookReadRpcCall;
 import pansong291.xposed.quickenergy.util.Config;
 import pansong291.xposed.quickenergy.util.Log;
@@ -15,11 +16,17 @@ public class AntBookRead {
         if (!Config.antBookRead())
             return;
 
+        long executeTime = RuntimeInfo.getInstance().getLong("consumeGold", 0);
+        if (System.currentTimeMillis() - executeTime < 21600000) {
+            return;
+        }
+        RuntimeInfo.getInstance().put("consumeGold", System.currentTimeMillis());
+
         new Thread() {
             @Override
             public void run() {
                 try {
-                    queryTaskCenterPage();
+//                    queryTaskCenterPage();
                     queryTask();
                     queryTreasureBox();
                 } catch (Throwable t) {
@@ -63,6 +70,8 @@ public class AntBookRead {
                                         }
                                         Log.forest("阅读书籍📚[" + name + "]#累计能量" + energy + "g");
                                     }
+                                } else {
+                                    Log.recordLog(jo.getString("resultDesc"), s);
                                 }
                                 if (energy >= 150) {
                                     break;

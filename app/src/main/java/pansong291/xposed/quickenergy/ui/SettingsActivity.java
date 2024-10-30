@@ -2,7 +2,6 @@ package pansong291.xposed.quickenergy.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,8 +12,6 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TabHost;
 import android.widget.Toast;
-
-import java.util.Locale;
 
 import pansong291.xposed.quickenergy.R;
 import pansong291.xposed.quickenergy.entity.*;
@@ -47,7 +44,7 @@ public class SettingsActivity extends Activity {
             sw_enableStall, sw_stallAutoClose, sw_stallAutoOpen, sw_stallAutoTask, sw_stallReceiveAward,
             sw_stallOpenType, sw_stallDonate, sw_chickenDiary, sw_collectGiftBox, sw_stallInviteRegister,
             sw_stallThrowManure, sw_greenFinance, sw_totalCertCount, sw_batchRobEnergy, sw_antBookRead, sw_consumeGold,
-            sw_omegakoiTown, sw_language_simplified_chinese;
+            sw_omegakoiTown, sw_language_simplified_chinese, sw_special_food, sw_ExchangeEnergyShield;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +183,7 @@ public class SettingsActivity extends Activity {
         sw_receiveFarmToolReward = findViewById(R.id.sw_receiveFarmToolReward);
         sw_recordFarmGame = findViewById(R.id.sw_recordFarmGame);
         sw_kitchen = findViewById(R.id.sw_kitchen);
+        sw_special_food = findViewById(R.id.sw_special_food);
         sw_useNewEggTool = findViewById(R.id.sw_useNewEggTool);
         sw_harvestProduce = findViewById(R.id.sw_harvestProduce);
         sw_donation = findViewById(R.id.sw_donation);
@@ -206,6 +204,7 @@ public class SettingsActivity extends Activity {
         sw_limitCollect = findViewById(R.id.sw_limitCollect);
         sw_doubleCard = findViewById(R.id.sw_doubleCard);
         sw_ExchangeEnergyDoubleClick = findViewById(R.id.sw_ExchangeEnergyDoubleClick);
+        sw_ExchangeEnergyShield = findViewById(R.id.sw_ExchangeEnergyShield);
         sw_ecoLifeTick = findViewById(R.id.sw_ecoLifeTick);
         sw_tiyubiz = findViewById(R.id.sw_tiyubiz);
         sw_insBlueBeanExchange = findViewById(R.id.sw_insBlueBeanExchange);
@@ -265,6 +264,7 @@ public class SettingsActivity extends Activity {
         sw_receiveFarmToolReward.setChecked(Config.receiveFarmToolReward());
         sw_recordFarmGame.setChecked(Config.recordFarmGame());
         sw_kitchen.setChecked(Config.kitchen());
+        sw_special_food.setChecked(Config.useSpecialFood());
         sw_useNewEggTool.setChecked(Config.useNewEggTool());
         sw_harvestProduce.setChecked(Config.harvestProduce());
         sw_donation.setChecked(Config.donation());
@@ -284,7 +284,8 @@ public class SettingsActivity extends Activity {
         sw_kbSignIn.setChecked(Config.kbSginIn());
         sw_limitCollect.setChecked(Config.isLimitCollect());
         sw_doubleCard.setChecked(Config.doubleCard());
-        sw_ExchangeEnergyDoubleClick.setChecked(Config.ExchangeEnergyDoubleClick());
+        sw_ExchangeEnergyDoubleClick.setChecked(Config.exchangeEnergyDoubleClick());
+        sw_ExchangeEnergyShield.setChecked(Config.exchangeEnergyShield());
         sw_ecoLifeTick.setChecked(Config.ecoLifeTick());
         sw_tiyubiz.setChecked(Config.tiyubiz());
         sw_insBlueBeanExchange.setChecked(Config.insBlueBeanExchange());
@@ -405,6 +406,10 @@ public class SettingsActivity extends Activity {
                     Config.setExchangeEnergyDoubleClick(sw.isChecked());
                     break;
 
+                case R.id.sw_ExchangeEnergyShield:
+                    Config.setExchangeEnergyShield(sw.isChecked());
+                    break;
+
                 case R.id.sw_reserve:
                     Config.setReserve(sw.isChecked());
                     break;
@@ -435,6 +440,10 @@ public class SettingsActivity extends Activity {
 
                 case R.id.sw_kitchen:
                     Config.setKitchen(sw.isChecked());
+                    break;
+
+                case R.id.sw_special_food:
+                    Config.setUseSpecialFood(sw.isChecked());
                     break;
 
                 case R.id.sw_useNewEggTool:
